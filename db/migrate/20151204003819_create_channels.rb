@@ -6,7 +6,7 @@ class CreateChannels < ActiveRecord::Migration
       t.string :image
       t.string :post_type
       t.string :rss_link
-      t.string :approved
+      t.boolean :approved
 
       t.timestamps null: false
     end

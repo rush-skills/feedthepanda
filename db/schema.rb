@@ -11,7 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204001230) do
+ActiveRecord::Schema.define(version: 20151204011306) do
+
+  create_table "channel_admins", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "channel_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "channel_admins", ["channel_id"], name: "index_channel_admins_on_channel_id", using: :btree
+  add_index "channel_admins", ["user_id"], name: "index_channel_admins_on_user_id", using: :btree
+
+  create_table "channels", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.string   "image",       limit: 255
+    t.string   "post_type",   limit: 255
+    t.string   "rss_link",    limit: 255
+    t.boolean  "approved"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "description", limit: 255
+    t.string   "link",        limit: 255
+    t.integer  "user_id",     limit: 4
+    t.integer  "channel_id",  limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "channel_id", limit: 4
+    t.boolean  "approved"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "subscriptions", ["channel_id"], name: "index_subscriptions_on_channel_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -25,6 +70,13 @@ ActiveRecord::Schema.define(version: 20151204001230) do
     t.string   "gcm_token",  limit: 255
     t.string   "api_key",    limit: 255
     t.boolean  "admin"
+    t.boolean  "superadmin"
   end
 
+  add_foreign_key "channel_admins", "channels"
+  add_foreign_key "channel_admins", "users"
+  add_foreign_key "posts", "channels"
+  add_foreign_key "posts", "users"
+  add_foreign_key "subscriptions", "channels"
+  add_foreign_key "subscriptions", "users"
 end

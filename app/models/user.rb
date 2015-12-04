@@ -14,15 +14,23 @@
 #  gcm_token  :string(255)
 #  api_key    :string(255)
 #  admin      :boolean
+#  superadmin :boolean
 #
 
 class User < ActiveRecord::Base
   # enum role: [:user, :vip, :admin]
   after_initialize :init, :if => :new_record?
 
+  has_many :channel_admins
+  has_many :subscriptions
+  has_many :channels, through: :channel_admin
+  has_many :subscribers, through: :subscriptions, source: :channel
+  has_many :posts
+
   def init
     if User.count == 0
       self.admin ||= true
+      self.superadmin ||= true
     end
     hex = SecureRandom.hex
     while User.exists?(api_key: hex)
@@ -51,8 +59,10 @@ class User < ActiveRecord::Base
       field :name
       field :email
       field :admin
-      field :api_key
       field :avatar
+      field :channels
+      field :subscriptions
+      field :posts
     end
     list do
       field :name
@@ -65,5 +75,8 @@ class User < ActiveRecord::Base
       field :avatar
       field :admin
     end
+  end
+  def to_s
+    self.name
   end
 end

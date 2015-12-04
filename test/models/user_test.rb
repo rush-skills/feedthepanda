@@ -14,6 +14,7 @@
 #  gcm_token  :string(255)
 #  api_key    :string(255)
 #  admin      :boolean
+#  superadmin :boolean
 #
 
 require 'test_helper'

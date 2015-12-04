@@ -6,7 +6,7 @@ table
       th Title
       th Description
       th Link
-      th Author
+      th User
       th Channel
       th
       th
@@ -18,7 +18,7 @@ table
         td = post.title
         td = post.description
         td = post.link
-        td = post.author
+        td = post.user
         td = post.channel
         td = link_to 'Show', post
         td = link_to 'Edit', edit_post_path(post)

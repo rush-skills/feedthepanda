@@ -42,9 +42,10 @@ end
 
 gem "font-awesome-rails"
 gem 'rails_admin'
+gem 'rails_admin_toggleable'
 
 gem 'enumerize'
-# gem "cancancan"
+gem "cancancan"
 # gem 'paper_trail'
 gem 'carrierwave'
 # gem 'kaminari'

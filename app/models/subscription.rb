@@ -1,4 +1,49 @@
+# == Schema Information
+#
+# Table name: subscriptions
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  channel_id :integer
+#  approved   :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_subscriptions_on_channel_id  (channel_id)
+#  index_subscriptions_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_7e8baea494  (channel_id => channels.id)
+#  fk_rails_933bdff476  (user_id => users.id)
+#
+
 class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :channel
+
+	scope :approved, -> {where(approved: true)}
+
+  rails_admin do
+  	show do
+  		field :user_id
+  		field :channel_id
+  		field :approved
+  	end
+  	list do
+  		field :user_id
+  		field :channel_id
+  		field :approved, :toggle
+  	end
+  	edit do
+  		field :user_id
+  		field :channel_id
+  		field :approved
+  	end
+  end
+  def to_s
+    self.user.to_s + " - " + self.channel.to_s
+  end
 end
