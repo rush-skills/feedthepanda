@@ -43,10 +43,11 @@ gem 'passenger'
 gem "font-awesome-rails"
 gem 'rails_admin'
 gem 'rails_admin_toggleable'
+gem 'rails_admin_history_rollback'
 
 gem 'enumerize'
 gem "cancancan"
-# gem 'paper_trail'
+gem 'paper_trail'
 gem 'carrierwave'
 # gem 'kaminari'
 

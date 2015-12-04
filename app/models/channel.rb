@@ -14,6 +14,7 @@
 #
 
 class Channel < ActiveRecord::Base
+  has_paper_trail
 	has_many :channel_admins
 	has_many :subscriptions
 	has_many :admins, through: :channel_admins, source: :user

@@ -28,5 +28,13 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    if user and user.role.admin?
+        can :access, :rails_admin   # grant access to rails_admin
+        can :dashboard              # grant access to the dashboard
+        can :manage, [User, Complaint, Organization, Police, Hearing, Forward]
+        cannot :clone, [User]
+        can :history, :all
+        cannot :import, [User]
+    end
   end
 end
