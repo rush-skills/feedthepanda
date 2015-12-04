@@ -20,6 +20,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'annotate', require:  false
 gem 'therubyracer', :platform=>:ruby
 group :development do
   gem 'better_errors'
@@ -38,3 +39,16 @@ group :production do
   gem 'passenger'
   gem 'rails_12factor'
 end
+
+gem "font-awesome-rails"
+gem 'rails_admin'
+
+gem 'enumerize'
+# gem "cancancan"
+# gem 'paper_trail'
+gem 'carrierwave'
+# gem 'kaminari'
+
+# gem 'searchkick'
+
+gem 'faker'
