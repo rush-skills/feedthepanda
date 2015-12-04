@@ -28,6 +28,18 @@ class Post < ActiveRecord::Base
     self.channel.can_read user
   end
 
+
+  after_create do |notification|
+    require 'gcm'
+
+    tokens = notification.channel.subscribers.pluck(:gcm_token)
+
+    gcm = GCM.new(ENV["GCM_KEY"])
+    options = {data: {title: "New post in "+notification.channel.to_s, body: notification.title}}
+    response = gcm.send(tokens,options)
+    Rails.logger.warn ("GCM Sent, Response: " + response.to_s)
+  end
+
   rails_admin do
     show do
       field :title

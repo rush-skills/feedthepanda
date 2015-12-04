@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show]
+  before_action :authenticate_user!
 
   # GET /channels
   # GET /channels.json
@@ -10,10 +11,11 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
+    @posts = @channel.posts
   end
 
   def feed
-
+    @posts = current_user.feed
   end
 
   # GET /channels/new

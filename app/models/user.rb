@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
       field :name
       field :email
       field :admin
+      field :gcm_token
     end
     edit do
       field :name

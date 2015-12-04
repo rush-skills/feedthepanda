@@ -12,5 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require_tree .
+// require bootstrap-sprockets
+// require_tree .
+//= require materialize
+//= require init
+//= require script
+//= require google_analytics

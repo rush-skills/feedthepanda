@@ -1,13 +1,16 @@
-/ navigation styled for Bootstrap 3.0
-nav.navbar.navbar-inverse.navbar-fixed-top
-  .container
-    .navbar-header
-      button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      = link_to 'Home', root_path, class: 'navbar-brand'
-    .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        == render 'layouts/navigation_links'
+nav class="top-nav"
+  div class="container"
+    div class="nav-wrapper"
+      a class="page-title"
+        = content_for?(:title) ? yield(:title) : 'FeedThePanda'
+
+div class="container"
+  a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"
+   i class="mdi-navigation-menu"
+
+ul id="nav-mobile" class="side-nav fixed"
+  li class="logo"
+    a id="logo-container" href=root_path class="brand-logo"
+      img id="front-page-logo" src="/ftp.png"
+
+  == render 'layouts/navigation_links'

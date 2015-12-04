@@ -55,3 +55,9 @@ gem 'carrierwave'
 
 gem 'faker'
 gem 'responders'
+gem 'gcm'
+
+source 'https://rails-assets.org' do
+  # gem 'rails-assets-BOWER_PACKAGE_NAME'
+  gem 'rails-assets-materialize'
+end

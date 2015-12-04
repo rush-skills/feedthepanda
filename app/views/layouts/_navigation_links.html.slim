@@ -1,0 +1,16 @@
+- if user_signed_in?
+	li class="bold"
+	  a href=feed_path class="waves-effect waves-teal" Feed
+
+	li class="bold"
+	  a href=channels_path class="waves-effect waves-teal" Browse Channels
+
+	- current_user.subscribed_channels.each do |sc|
+		li class="bold"
+		  a href=channel_path(sc) class="waves-effect waves-teal"
+		  	= sc
+		  	span.new.badge
+		  		| x
+- else
+	li class="bold"
+	  a href=signin_path class="waves-effect waves-teal" Sign In
