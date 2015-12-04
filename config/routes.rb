@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api, :defaults => {:format => :json} do
 	  namespace :v1 do
 	    post '/login', to: "sessions#login"
+	    match '/emaillogin', to: "sessions#emaillogin", via: [:get, :post]
 	    get '/logged_in', to: "sessions#logged_in"
 	    post '/register_gcm', to: "sessions#register_gcm"
 	    get 'feed', to: "channels#feed"

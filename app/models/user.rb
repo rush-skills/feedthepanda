@@ -20,7 +20,7 @@
 class User < ActiveRecord::Base
   has_paper_trail
   # enum role: [:user, :vip, :admin]
-  after_create :init, :if => :new_record?
+  after_create :init
 
   has_many :channel_admins
   has_many :subscriptions

@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
     #   redirect_to root_url, :error => "Only for IIITD Emails"
     #   Rails.logger.warn "Non IIITD access from "+ auth['info']['email'].to_s
     # end
-    user = User.where(:provider => auth['provider'],
-                      :uid => auth['uid'].to_s).first || User.create_with_omniauth(auth)
+    user = User.where("provider = ? AND uid = ? OR email = ?", auth['provider'], auth['uid'].to_s, auth['info']['email'].to_s).first || User.create_with_omniauth(auth)
     reset_session
     session[:user_id] = user.id
     redirect_to root_url, :notice => 'Signed in!'
