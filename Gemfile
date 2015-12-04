@@ -54,3 +54,4 @@ gem 'carrierwave'
 # gem 'searchkick'
 
 gem 'faker'
+gem 'responders'

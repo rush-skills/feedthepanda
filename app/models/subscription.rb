@@ -22,6 +22,19 @@ class Subscription < ActiveRecord::Base
 
 	scope :approved, -> {where(approved: true)}
 
+  validates_uniqueness_of :user, scope: :channel
+
+  after_create :auto_approve
+
+  def auto_approve
+    if self.channel.post_type.members?
+      self.approved = false
+    else
+      self.approved = true
+    end
+    self.save
+  end
+
   rails_admin do
   	show do
   		field :user

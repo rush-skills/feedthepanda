@@ -20,7 +20,7 @@ class ChannelAdmin < ActiveRecord::Base
   belongs_to :channel
 
   validates_presence_of :user, :channel
-
+  validates_uniqueness_of :user, scope: :channel
   rails_admin do
   	show do
   		field :user

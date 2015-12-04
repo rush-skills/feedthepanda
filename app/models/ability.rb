@@ -28,13 +28,32 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-    if user and user.role.admin?
+    if user and user.is_admin?
         can :access, :rails_admin   # grant access to rails_admin
         can :dashboard              # grant access to the dashboard
-        can :manage, [User, Complaint, Organization, Police, Hearing, Forward]
-        cannot :clone, [User]
-        can :history, :all
-        cannot :import, [User]
+        can :read, [Post, Subscription, Channel]
+        # can :read, Post do |object|
+        #     object.can_read(user)
+        # end
+        can [:edit], [Channel] do |object|
+            object.is_admin(user)
+        end
+        can [:create, :edit], [Post] do |object|
+            object.channel.is_admin(user)
+        end
+        can [:toggle], [Subscription] do |object|
+            object.channel.is_admin(user)
+        end
+        if user.admin
+            can [:read, :edit, :create], [Channel, ChannelAdmin]
+            can [:read, :edit], Post
+            can :toggle, :channel
+        end
+        if user.superadmin
+            can :manage, :all
+            can :history, :all
+            can :toggle, :all
+        end
     end
   end
 end

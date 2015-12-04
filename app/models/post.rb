@@ -24,6 +24,10 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :title, :description, :channel
 
+  def can_read(user)
+    self.channel.can_read user
+  end
+
   rails_admin do
     show do
       field :title

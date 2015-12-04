@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
   has_many :channel_admins
   has_many :subscriptions
   has_many :channels, through: :channel_admins
-  has_many :subscribers, through: :subscriptions, source: :channel
+  has_many :subscribed_channels, through: :subscriptions, source: :channel
+  has_many :feed, through: :subscribed_channels, source: :posts
   has_many :posts
 
   validates_presence_of :email
@@ -41,6 +42,17 @@ class User < ActiveRecord::Base
     end
     self.api_key = hex
     self.save!
+    Channel.forced.each do |c|
+      Subscription.create(channel: c,user: self)
+    end
+  end
+
+  def is_admin?
+    self.admin or self.superadmin or self.channels.count > 0
+  end
+
+  def subscribed(channel)
+    self.subscribed_channels.exists? channel
   end
 
   def self.create_with_omniauth(auth)
@@ -55,7 +67,6 @@ class User < ActiveRecord::Base
       end
     end
   end
-
 
   rails_admin do
     show do
