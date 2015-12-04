@@ -20,7 +20,7 @@
 class User < ActiveRecord::Base
   has_paper_trail
   # enum role: [:user, :vip, :admin]
-  after_create :init
+  after_create :initial
 
   has_many :channel_admins
   has_many :subscriptions
@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     Channel.forced.each do |c|
       Subscription.create(channel: c,user: self)
     end
+  end
+
+  def sorted_feed
+    self.feed.order("updated_at DESC")
   end
 
   def is_admin?

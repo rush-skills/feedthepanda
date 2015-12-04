@@ -1,24 +1,3 @@
-p#notice = notice
-
-p
-  strong Name:
-  = @channel.name
-p
-  strong Description:
-  = @channel.description
-p
-  strong Image:
-  = @channel.image
-p
-  strong Post type:
-  = @channel.post_type
-p
-  strong Rss link:
-  = @channel.rss_link
-p
-  strong Approved:
-  = @channel.approved
-
-= link_to 'Edit', edit_channel_path(@channel)
-'|
-= link_to 'Back', channels_path
+- content_for :title, "FeedThePanda - "+@channel.to_s
+.row
+  == render @posts

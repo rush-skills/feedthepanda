@@ -1,16 +1,17 @@
 - if user_signed_in?
 	li class="bold"
-	  a href=feed_path class="waves-effect waves-teal" Feed
+	  a href=feed_path class="waves-effect" Feed
 
 	li class="bold"
-	  a href=channels_path class="waves-effect waves-teal" Browse Channels
+	  a href=channels_path class="waves-effect" Browse Channels
 
 	- current_user.subscribed_channels.each do |sc|
 		li class="bold"
-		  a href=channel_path(sc) class="waves-effect waves-teal"
+		  a href=channel_path(sc) class="waves-effect"
+		  	| #
 		  	= sc
-		  	span.new.badge
-		  		| x
+		  	span.badge
+		  		= sc.posts.count
 - else
 	li class="bold"
-	  a href=signin_path class="waves-effect waves-teal" Sign In
+	  a href=signin_path class="waves-effect" Sign In

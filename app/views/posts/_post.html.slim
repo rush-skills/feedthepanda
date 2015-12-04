@@ -1,10 +1,16 @@
 .col.s12.m6
-	div class="card white"
-	  div class="card-content"
-	    span class="card-title"
+	div class="card-panel hover white"
+	    span class="card-title truncate"
 		  	- if post.link.present?
 		  		a href=post.link
 			     = post.title
 	     	- else
 	     		= post.title
-	    p = post.description
+	    p.truncate = post.description
+	  	p
+	  		= link_to post.channel do
+	  			| #
+	  			= post.channel
+	  		|  around 
+	  		= time_ago_in_words post.updated_at
+	  		|  ago

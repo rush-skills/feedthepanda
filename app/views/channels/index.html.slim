@@ -1,31 +1,18 @@
-h1 Listing channels
-
-table
-  thead
-    tr
-      th Name
-      th Description
-      th Image
-      th Post type
-      th Rss link
-      th Approved
-      th
-      th
-      th
-
-  tbody
-    - @channels.each do |channel|
-      tr
-        td = channel.name
-        td = channel.description
-        td = channel.image
-        td = channel.post_type
-        td = channel.rss_link
-        td = channel.approved
-        td = link_to 'Show', channel
-        td = link_to 'Edit', edit_channel_path(channel)
-        td = link_to 'Destroy', channel, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Channel', new_channel_path
+.row
+  .col.s12.m10.offset-m1
+    ul class="collapsible popout" data-collapsible="accordion"
+      - @channels.each do |channel|
+        li
+          .collapsible-header
+            = channel.to_s
+            / span.new.badge = channel.posts.count
+          .collapsible-body
+            p
+              = channel.description
+            .center-align
+              - unless channel.post_type.forced?
+                - if current_user.subscribed channel
+                  = link_to "Unsubscribe", unsubscribe_path(channel), method: :post, class: "btn waves-effect"
+                - else
+                  = link_to "Subscribe", subscribe_path(channel), method: :post,  class: "btn waves-effect"
+            br

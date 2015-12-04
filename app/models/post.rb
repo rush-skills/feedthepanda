@@ -32,7 +32,7 @@ class Post < ActiveRecord::Base
   after_create do |notification|
     require 'gcm'
 
-    tokens = notification.channel.subscribers.pluck(:gcm_token)
+    tokens = notification.channel.subscribers.where.not(gcm_token: nil).pluck(:gcm_token)
 
     gcm = GCM.new(ENV["GCM_KEY"])
     options = {data: {title: "New post in "+notification.channel.to_s, body: notification.title}}

@@ -3,7 +3,7 @@ class API::V1::ChannelsController < API::V1::ApplicationController
 
 	def feed
 		@posts = current_user.feed
-		render @posts
+		# render @posts
 	end
 
 	def index

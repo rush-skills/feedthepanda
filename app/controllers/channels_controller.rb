@@ -15,7 +15,7 @@ class ChannelsController < ApplicationController
   end
 
   def feed
-    @posts = current_user.feed
+    @posts = current_user.sorted_feed
   end
 
   # GET /channels/new

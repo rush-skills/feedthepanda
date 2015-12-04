@@ -22,6 +22,9 @@ Rails.application.routes.draw do
 	end
 
 	resources :channels
+  post '/channels/:id/subscribe', to: 'channels#subscribe', as: :subscribe
+  post '/channels/:id/unsubscribe', to: 'channels#unsubscribe', as: :unsubscribe
+
 	get '/feed', to: "channels#feed", as: :feed
 
   root to: 'visitors#index'
