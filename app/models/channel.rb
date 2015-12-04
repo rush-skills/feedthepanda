@@ -37,15 +37,21 @@ class Channel < ActiveRecord::Base
       field :image
       field :post_type
       field :rss_link
-      field :approved, :toggle
+      field :approved
       field :admins
       field :subscribers
       field :posts
     end
     list do
       field :name
-      field :email
-      field :admin
+      # field :description
+      # field :image
+      field :post_type
+      # field :rss_link
+      field :approved
+      # field :admins
+      # field :subscribers
+      # field :posts
     end
     edit do
       field :name

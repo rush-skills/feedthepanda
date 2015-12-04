@@ -16,11 +16,6 @@
 #  index_posts_on_channel_id  (channel_id)
 #  index_posts_on_user_id     (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_06b7a0db99  (channel_id => channels.id)
-#  fk_rails_5b5ddfd518  (user_id => users.id)
-#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

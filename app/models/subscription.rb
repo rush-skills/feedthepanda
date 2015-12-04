@@ -14,11 +14,6 @@
 #  index_subscriptions_on_channel_id  (channel_id)
 #  index_subscriptions_on_user_id     (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_7e8baea494  (channel_id => channels.id)
-#  fk_rails_933bdff476  (user_id => users.id)
-#
 
 class Subscription < ActiveRecord::Base
   belongs_to :user
@@ -28,18 +23,18 @@ class Subscription < ActiveRecord::Base
 
   rails_admin do
   	show do
-  		field :user_id
-  		field :channel_id
+  		field :user
+  		field :channel
   		field :approved
   	end
   	list do
-  		field :user_id
-  		field :channel_id
+  		field :user
+  		field :channel
   		field :approved, :toggle
   	end
   	edit do
-  		field :user_id
-  		field :channel_id
+  		field :user
+  		field :channel
   		field :approved
   	end
   end

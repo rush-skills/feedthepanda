@@ -13,11 +13,6 @@
 #  index_channel_admins_on_channel_id  (channel_id)
 #  index_channel_admins_on_user_id     (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_5d62c432c0  (user_id => users.id)
-#  fk_rails_cd5273bcac  (channel_id => channels.id)
-#
 
 class ChannelAdmin < ActiveRecord::Base
   belongs_to :user
@@ -27,16 +22,16 @@ class ChannelAdmin < ActiveRecord::Base
 
   rails_admin do
   	show do
-  		field :user_id
-  		field :channel_id
+  		field :user
+  		field :channel
   	end
   	list do
-  		field :user_id
-  		field :channel_id
+  		field :user
+  		field :channel
   	end
   	edit do
-  		field :user_id
-  		field :channel_id
+  		field :user
+  		field :channel
   	end
   end
 

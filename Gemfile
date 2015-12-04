@@ -33,12 +33,12 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rubocop'
-  gem 'thin'
+  # gem 'thin'
 end
 group :production do
-  gem 'passenger'
   gem 'rails_12factor'
 end
+gem 'passenger'
 
 gem "font-awesome-rails"
 gem 'rails_admin'

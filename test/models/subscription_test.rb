@@ -14,11 +14,6 @@
 #  index_subscriptions_on_channel_id  (channel_id)
 #  index_subscriptions_on_user_id     (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_7e8baea494  (channel_id => channels.id)
-#  fk_rails_933bdff476  (user_id => users.id)
-#
 
 require 'test_helper'
 

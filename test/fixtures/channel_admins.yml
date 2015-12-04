@@ -13,11 +13,6 @@
 #  index_channel_admins_on_channel_id  (channel_id)
 #  index_channel_admins_on_user_id     (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_5d62c432c0  (user_id => users.id)
-#  fk_rails_cd5273bcac  (channel_id => channels.id)
-#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

@@ -19,13 +19,15 @@
 
 class User < ActiveRecord::Base
   # enum role: [:user, :vip, :admin]
-  after_initialize :init, :if => :new_record?
+  after_create :init, :if => :new_record?
 
   has_many :channel_admins
   has_many :subscriptions
-  has_many :channels, through: :channel_admin
+  has_many :channels, through: :channel_admins
   has_many :subscribers, through: :subscriptions, source: :channel
   has_many :posts
+
+  validates_presence_of :email
 
   def init
     if User.count == 0
