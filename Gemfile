@@ -20,7 +20,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'annotate', require:  false
+gem 'annotate'
 gem 'therubyracer', :platform=>:ruby
 group :development do
   gem 'better_errors'

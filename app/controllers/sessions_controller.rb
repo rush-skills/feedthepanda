@@ -6,6 +6,11 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
+    reset_session
+    # unless auth['info']['email'].split('@').last == "iiitd.ac.in"
+    #   redirect_to root_url, :error => "Only for IIITD Emails"
+    #   Rails.logger.warn "Non IIITD access from "+ auth['info']['email'].to_s
+    # end
     user = User.where(:provider => auth['provider'],
                       :uid => auth['uid'].to_s).first || User.create_with_omniauth(auth)
     reset_session
