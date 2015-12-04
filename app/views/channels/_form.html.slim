@@ -1,0 +1,13 @@
+= simple_form_for(@channel) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.input :image
+    = f.input :post_type
+    = f.input :rss_link
+    = f.input :approved
+
+  .form-actions
+    = f.button :submit

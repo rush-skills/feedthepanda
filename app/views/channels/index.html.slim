@@ -1,0 +1,31 @@
+h1 Listing channels
+
+table
+  thead
+    tr
+      th Name
+      th Description
+      th Image
+      th Post type
+      th Rss link
+      th Approved
+      th
+      th
+      th
+
+  tbody
+    - @channels.each do |channel|
+      tr
+        td = channel.name
+        td = channel.description
+        td = channel.image
+        td = channel.post_type
+        td = channel.rss_link
+        td = channel.approved
+        td = link_to 'Show', channel
+        td = link_to 'Edit', edit_channel_path(channel)
+        td = link_to 'Destroy', channel, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Channel', new_channel_path
