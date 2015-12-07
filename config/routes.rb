@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 	    get '/channels/:id/posts', to: 'channels#show'
 	    post '/channels/:id/subscribe', to: 'channels#subscribe'
 	    post '/channels/:id/unsubscribe', to: 'channels#unsubscribe'
-	    post '/posts/:pid/mark_read', to: 'channels#mark_read'
+	    match '/mark_read', to: 'channels#mark_read', via: [:get, :post]
 
 	    match '/add_from_email', to: 'external_api#email', via: [:get, :post]
 	    match '/channel_api', to: 'external_api#channel_api', via: [:get, :post]
@@ -27,7 +27,8 @@ Rails.application.routes.draw do
 	resources :channels
   post '/channels/:id/subscribe', to: 'channels#subscribe', as: :subscribe
   post '/channels/:id/unsubscribe', to: 'channels#unsubscribe', as: :unsubscribe
-
+  post '/post/:id/read', to: 'channels#mark_read', as: :mark_read
+  get '/channels/:id/manage', to: 'channels#manage', as: :manage_channel
 	get '/feed', to: "channels#feed", as: :feed
 
   root to: 'visitors#index'

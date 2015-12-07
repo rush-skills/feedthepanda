@@ -62,3 +62,4 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-materialize'
 end
 gem 'friendly_id', '~> 5.1.0'
+gem 'unread'

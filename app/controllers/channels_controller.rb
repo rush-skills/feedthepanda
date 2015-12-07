@@ -11,11 +11,11 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @posts = @channel.posts
+    @posts = @channel.posts.with_read_marks_for(current_user)
   end
 
   def feed
-    @posts = current_user.sorted_feed
+    @posts = current_user.sorted_feed.with_read_marks_for(current_user)
   end
 
   # GET /channels/new

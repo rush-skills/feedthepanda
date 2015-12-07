@@ -19,6 +19,7 @@
 
 class User < ActiveRecord::Base
   has_paper_trail
+  acts_as_reader
   # enum role: [:user, :vip, :admin]
   after_create :init
 

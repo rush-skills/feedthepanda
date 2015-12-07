@@ -18,6 +18,8 @@
 #
 
 class Post < ActiveRecord::Base
+  acts_as_readable :on => :created_at
+
   has_paper_trail
   belongs_to :user
   belongs_to :channel

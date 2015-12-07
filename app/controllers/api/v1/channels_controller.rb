@@ -19,6 +19,14 @@ class API::V1::ChannelsController < API::V1::ApplicationController
 		@posts = @channel.posts
 	end
 
+  def mark_read
+    @posts  = Post.find(params[:post_ids].gsub(/\[|\]/,'').split(/,/).map(&:to_i))
+    @posts.each do |p|
+      p.mark_as_read! :for => current_user
+    end
+    render json: {status: 200, message: "Success"}
+  end
+
 	def subscribe
 		subs = Subscription.new(user: current_user, channel: @channel)
     if subs.save

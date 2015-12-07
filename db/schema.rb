@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207010621) do
+ActiveRecord::Schema.define(version: 20151207021408) do
 
   create_table "channel_admins", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 20151207010621) do
 
   add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "read_marks", force: :cascade do |t|
+    t.integer  "readable_id",   limit: 4
+    t.string   "readable_type", limit: 255, null: false
+    t.integer  "reader_id",     limit: 4
+    t.string   "reader_type",   limit: 255, null: false
+    t.datetime "timestamp"
+  end
+
+  add_index "read_marks", ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
