@@ -35,12 +35,13 @@ class Ability
         # can :read, Post do |object|
         #     object.can_read(user)
         # end
-        can [:edit], [Channel] do |object|
+        can [:edit,:show], [Channel] do |object|
             object.is_admin(user)
         end
-        can [:create, :edit], [Post] do |object|
+        can [:edit], [Post] do |object|
             object.channel.is_admin(user)
         end
+        can [:create], [Post]
         can [:toggle], [Subscription] do |object|
             object.channel.is_admin(user)
         end

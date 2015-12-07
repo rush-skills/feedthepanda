@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :correct_user?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_url, flash: {:alert => exception.message}
+  end
+
   # private
   def current_user
     begin
@@ -23,13 +27,13 @@ class ApplicationController < ActionController::Base
   def correct_user?
     @user = User.find(params[:id])
     unless current_user == @user
-      redirect_to root_url, :alert => "Access denied."
+      redirect_to root_url, flash: {:alert => "Access denied."}
     end
   end
 
   def authenticate_user!
     if !current_user
-      redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+      redirect_to root_url, flash: {:alert => 'You need to sign in for access to this page.'}
     end
   end
 

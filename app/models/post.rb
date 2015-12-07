@@ -4,12 +4,12 @@
 #
 #  id          :integer          not null, primary key
 #  title       :string(255)
-#  description :string(255)
 #  link        :string(255)
 #  user_id     :integer
 #  channel_id  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  description :text(65535)
 #
 # Indexes
 #

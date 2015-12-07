@@ -1,4 +1,5 @@
 $color1: #42a5f5;
+$page-background: #f3f3f3;
 nav{
 	background-color: $color1;
 }
@@ -19,4 +20,7 @@ nav.top-nav a.page-title{
 }
 nav.top-nav a.page-title{
 	font-size: 36px;
+}
+html, main{
+	background: $page-background;
 }

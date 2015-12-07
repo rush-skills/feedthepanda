@@ -20,7 +20,7 @@
 class User < ActiveRecord::Base
   has_paper_trail
   # enum role: [:user, :vip, :admin]
-  after_create :initial
+  after_create :init
 
   has_many :channel_admins
   has_many :subscriptions
@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
   validates_presence_of :email
 
   def init
-    if User.count == 0
-      self.admin ||= true
-      self.superadmin ||= true
+    if User.count == 1
+      self.admin = true
+      self.superadmin = true
     end
     hex = SecureRandom.hex
     while User.exists?(api_key: hex)

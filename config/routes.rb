@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 	    post '/channels/:id/subscribe', to: 'channels#subscribe'
 	    post '/channels/:id/unsubscribe', to: 'channels#unsubscribe'
 	    post '/posts/:pid/mark_read', to: 'channels#mark_read'
+
+	    match '/add_from_email', to: 'external_api#email', via: [:get, :post]
+	    match '/channel_api', to: 'external_api#channel_api', via: [:get, :post]
 	  end
 	end
 

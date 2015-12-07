@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:show]
+  before_action :set_channel, only: [:show, :subscribe, :unsubscribe]
   before_action :authenticate_user!
 
   # GET /channels
@@ -21,6 +21,24 @@ class ChannelsController < ApplicationController
   # GET /channels/new
   def new
     @channel = Channel.new
+  end
+
+  def subscribe
+    subs = Subscription.new(user: current_user, channel: @channel)
+    if subs.save
+      redirect_to channels_path, flash: { message: "Success"}
+    else
+      redirect_to channels_path, flash: { message: "Failed"}
+    end
+  end
+
+  def unsubscribe
+    subs = Subscription.where(user: current_user, channel: @channel)
+    if subs.destroy_all
+      redirect_to channels_path, flash: { message: "Success"}
+    else
+      redirect_to channels_path, flash: { message: "Failed"}
+    end
   end
 
   # GET /channels/1/edit
