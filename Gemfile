@@ -61,3 +61,4 @@ source 'https://rails-assets.org' do
   # gem 'rails-assets-BOWER_PACKAGE_NAME'
   gem 'rails-assets-materialize'
 end
+gem 'friendly_id', '~> 5.1.0'

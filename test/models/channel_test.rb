@@ -11,6 +11,11 @@
 #  approved    :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  slug        :string(255)
+#
+# Indexes
+#
+#  index_channels_on_slug  (slug) UNIQUE
 #
 
 require 'test_helper'

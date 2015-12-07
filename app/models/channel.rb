@@ -11,9 +11,28 @@
 #  approved    :boolean
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  slug        :string(255)
+#
+# Indexes
+#
+#  index_channels_on_slug  (slug) UNIQUE
 #
 
 class Channel < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
+  # Try building a slug based on the following fields in
+  # increasing order of specificity.
+  def slug_candidates
+    [
+      :name,
+      [:name, :post_type],
+      [:name, :post_type, :created_at],
+      [:name, :post_type, :description]
+    ]
+  end
+
   has_paper_trail
   has_many :channel_admins, dependent: :destroy
   has_many :subscriptions, dependent: :destroy

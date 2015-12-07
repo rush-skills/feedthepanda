@@ -8,7 +8,7 @@
 	     		= post.title
 	    p.truncate = post.description
 	  	p
-	  		= link_to post.channel do
+	  		= link_to channel_path(post.channel.friendly_id) do
 	  			| #
 	  			= post.channel
 	  		|  around 

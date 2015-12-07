@@ -47,7 +47,8 @@ class ChannelsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_channel
-      @channel = Channel.find(params[:id])
+      @channel = Channel.find_by_id(params[:id])
+      @channel ||= Channel.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
