@@ -1,8 +1,9 @@
 li
-  .collapsible-header
+  - unread = post.unread? current_user
+  .collapsible-header.post unread=unread data-id=post.id
     .row.botm0
       .col.s9.truncate
-        - if post.unread? current_user
+        - if unread
           strong
             = post.title
         - else

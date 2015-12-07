@@ -18,6 +18,12 @@ class ChannelsController < ApplicationController
     @posts = current_user.sorted_feed.with_read_marks_for(current_user)
   end
 
+  def mark_read
+    @post = Post.find params[:id]
+    @post.mark_as_read! :for => current_user
+    render json: {status: 200, message: "Success"}
+  end
+
   # GET /channels/new
   def new
     @channel = Channel.new
