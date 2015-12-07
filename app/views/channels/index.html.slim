@@ -1,18 +1,17 @@
 .row
-  .col.s12.m10.offset-m1
-    ul class="collapsible popout" data-collapsible="accordion"
-      - @channels.each do |channel|
-        li
-          .collapsible-header
-            = channel.to_s
-            / span.new.badge = channel.posts.count
-          .collapsible-body
-            p
-              = channel.description
-            .center-align
-              - unless channel.post_type.forced?
-                - if current_user.subscribed channel
-                  = link_to "Unsubscribe", unsubscribe_path(channel), method: :post, class: "btn waves-effect"
-                - else
-                  = link_to "Subscribe", subscribe_path(channel), method: :post,  class: "btn waves-effect"
-            br
+  - @channels.each do |channel|
+    .col.s12.m12
+      div class="card-panel hover white"
+          span class="card-title truncate"
+            a href=channel_path(channel.friendly_id)
+              = channel.friendly_id
+            - unread_count = channel.posts.unread_by(current_user).count
+            - if unread_count > 0
+              span.new.badge = unread_count
+          p.truncate = channel.description
+          .center-align
+            - unless channel.post_type.forced?
+              - if current_user.subscribed channel
+                = link_to "Unsubscribe", unsubscribe_path(channel), method: :post, class: "btn waves-effect"
+              - else
+                = link_to "Subscribe", subscribe_path(channel), method: :post,  class: "btn waves-effect"

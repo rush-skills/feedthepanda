@@ -1,16 +1,25 @@
-.col.s12.m6
-	div class="card-panel hover white"
-	    span class="card-title truncate"
-		  	- if post.link.present?
-		  		a href=post.link
-			     = post.title
-	     	- else
-	     		= post.title
-	    p.truncate = post.description
-	  	p
-	  		= link_to channel_path(post.channel.friendly_id) do
-	  			| #
-	  			= post.channel
-	  		|  around 
-	  		= time_ago_in_words post.updated_at
-	  		|  ago
+li
+  .collapsible-header
+    .row.botm0
+      .col.s9.truncate
+        - if post.unread? current_user
+          strong
+            = post.title
+        - else
+          = post.title
+      .col.s3
+        .right-align
+          = link_to channel_path(post.channel.friendly_id) do
+            | #
+            = post.channel.to_s
+  .collapsible-body
+    .collapse-time.right-align
+      = time_ago_in_words post.updated_at
+      |  ago
+    p
+      / br
+      = post.description
+    .center-align
+      - if post.link.present?
+        = link_to "Open Link", post.link, method: :post, class: "btn waves-effect"
+    br

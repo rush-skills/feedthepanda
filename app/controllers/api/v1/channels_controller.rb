@@ -4,7 +4,7 @@ class API::V1::ChannelsController < API::V1::ApplicationController
 	before_action :set_channel, only: [:show, :subscribe, :unsubscribe]
 
 	def feed
-		@posts = current_user.feed
+		@posts = current_user.feed.with_read_marks_for(current_user)
 		# render @posts
 	end
 
@@ -16,7 +16,7 @@ class API::V1::ChannelsController < API::V1::ApplicationController
 		if current_user.subscribed @channel and @channel.post_type.members?
 			render json: {status: 401, message: "Not Subscribed"}
 		end
-		@posts = @channel.posts
+		@posts = @channel.posts.with_read_marks_for(current_user)
 	end
 
   def mark_read

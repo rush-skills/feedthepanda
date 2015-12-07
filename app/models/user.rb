@@ -78,6 +78,7 @@ class User < ActiveRecord::Base
       field :name
       field :email
       field :admin
+      field :api_key
       field :avatar
       field :channels
       field :subscriptions

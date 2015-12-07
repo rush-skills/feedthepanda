@@ -5,13 +5,13 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.approved
+    @channels = Channel.approved.reverse
   end
 
   # GET /channels/1
   # GET /channels/1.json
   def show
-    @posts = @channel.posts.with_read_marks_for(current_user)
+    @posts = @channel.posts.order("updated_at DESC").with_read_marks_for(current_user)
   end
 
   def feed

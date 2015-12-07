@@ -9,7 +9,7 @@
 		li class="bold"
 		  a href=channel_path(sc) class="waves-effect"
 		  	| #
-		  	= sc
+		  	= sc.friendly_id
 		  	span.badge
 		  		= sc.posts.count
 - else

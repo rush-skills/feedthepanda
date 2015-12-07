@@ -1,3 +1,6 @@
 - content_for :title, "FeedThePanda - Feed"
+
 .row
-	== render @posts
+  .col.s12.m10.offset-m1
+    ul class="collapsible popout" data-collapsible="accordion"
+      == render @posts

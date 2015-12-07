@@ -24,3 +24,22 @@ nav.top-nav a.page-title{
 html, main{
 	background: $page-background;
 }
+.botm0{
+	margin-bottom: 0px;
+}
+// .lightp{
+// 	padding: 0.5rem;
+// }
+.collapsible-body{
+	background: #fff;
+	p{
+		padding: 1rem;
+	}
+}
+.collapse-time{
+	padding-right: 2rem;
+	color: rgba(0, 0, 0, 0.71);
+}
+main{
+	padding-top: 40px;
+}
