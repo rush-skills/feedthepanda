@@ -12,14 +12,14 @@ li
         .right-align
           = link_to channel_path(post.channel.friendly_id) do
             | #
-            = post.channel.to_s
+            = post.channel.friendly_id
   .collapsible-body
     .collapse-time.right-align
       = time_ago_in_words post.updated_at
       |  ago
     p
       / br
-      = post.description
+      = Nokogiri::HTML(post.description).text
     .center-align
       - if post.link.present?
         = link_to "Open Link", post.link, method: :post, class: "btn waves-effect"

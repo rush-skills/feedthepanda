@@ -41,7 +41,33 @@ class Channel < ActiveRecord::Base
   scope :forced, -> {where(post_type: :forced)}
 
   after_save :apply_force
+  after_save :fetch_rss
   after_create :init
+
+  def fetch_rss
+    if self.rss_link.present?
+      feed = Feedjira::Feed.fetch_and_parse self.rss_link
+      feed.entries.each do |entry|
+        desc = ""
+        if entry.methods.include? :description
+          desc = entry.description
+        elsif entry.methods.include? :summary
+          desc = entry.summary
+        elsif entry.methods.include? :body
+          desc = entry.body
+        elsif entry.methods.include? :content
+          desc = entry.content
+        end
+        link = ""
+        if entry.methods.include? :url
+          link = entry.url
+        elsif entry.methods.include? :link
+          link = entry.link
+        end
+        Post.where(channel: self, title: entry.title, description: desc, link: link).first_or_create
+      end
+    end
+  end
 
   def apply_force
     if self.post_type.forced?
@@ -89,7 +115,7 @@ class Channel < ActiveRecord::Base
       field :image
       field :post_type
       field :rss_link
-      # field :api_key
+      field :api_key
       field :slug
       field :approved
       field :admins

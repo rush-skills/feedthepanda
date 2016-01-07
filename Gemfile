@@ -63,3 +63,4 @@ source 'https://rails-assets.org' do
 end
 gem 'friendly_id', '~> 5.1.0'
 gem 'unread'
+gem 'feedjira'

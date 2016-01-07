@@ -30,6 +30,7 @@ class Post < ActiveRecord::Base
     self.channel.can_read user
   end
 
+  validates_uniqueness_of :title, scope: :channel
 
   after_create do |notification|
     require 'gcm'
@@ -37,7 +38,7 @@ class Post < ActiveRecord::Base
     tokens = notification.channel.subscribers.where.not(gcm_token: nil).pluck(:gcm_token)
 
     gcm = GCM.new(ENV["GCM_KEY"])
-    options = {data: {title: "New post in "+notification.channel.to_s, body: notification.title}}
+    options = {data: {title: notification.channel.to_s, message: notification.title}}
     response = gcm.send(tokens,options)
     Rails.logger.warn ("GCM Sent, Response: " + response.to_s)
   end

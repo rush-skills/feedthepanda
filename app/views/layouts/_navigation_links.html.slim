@@ -1,9 +1,15 @@
 - if user_signed_in?
+	li
+		a href="#" = current_user.name
+
 	li class="bold"
 	  a href=feed_path class="waves-effect" Feed
 
 	li class="bold"
 	  a href=channels_path class="waves-effect" Browse Channels
+
+	li class="bold"
+	  a href=signout_path class="waves-effect" Sign Out
 
 	- current_user.subscribed_channels.each do |sc|
 		li class="bold"
